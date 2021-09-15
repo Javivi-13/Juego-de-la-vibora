@@ -17,12 +17,32 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+aim2 = vector(0, 0)
+
+
 
 
 def change(x, y):
     "Change snake direction."
     aim.x = x
     aim.y = y
+    
+def change2():
+    "Change food direction."
+    
+    dire = (random.randrange(4))
+    if (dire==1):
+        aim.x = 10
+        aim.y = 0
+    if (dire==2):
+        aim.x = -10
+        aim.y = 0
+    if (dire==3):
+        aim.x = 0
+        aim.y = 10
+    if (dire==4):
+        aim.x = 0
+        aim.y = -10
 
 
 def inside(head):
@@ -33,6 +53,8 @@ def inside(head):
 def move():
     "Move snake forward one segment."
     head = snake[-1].copy()
+    change2()
+    food.move(aim2)
     head.move(aim)
 
     if not inside(head) or head in snake:
